@@ -76,7 +76,8 @@ module.exports = {
   plugins: [
     '~/plugins/vee-validate.js',
     '~/plugins/muse.config.js',
-    '~/plugins/AxiosForm'
+    '~/plugins/AxiosForm',
+    '~/plugins/inject'
   ],
 
   /*
@@ -87,6 +88,7 @@ module.exports = {
     '@nuxtjs/axios',
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt'
+    // ['@nuxtjs/router', { keepDefaultRouter: true }]
   ],
   /*
    ** Axios module configuration
@@ -95,7 +97,7 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
   },
   generate: {
-    routes: ['/home'],
+    // routes: ['/'],
     dir: 'app/www'
   },
   /*
@@ -103,6 +105,7 @@ module.exports = {
    */
   build: {
     publicPath: '/nuxt/',
+    assetsPublicPath: './',
     vendor: [
       '~/plugins/vee-validate.js',
       '~/plugins/muse.config.js',

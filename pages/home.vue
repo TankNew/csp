@@ -8,7 +8,7 @@
         <p class="lead mt-5">{{ companyInfo.name }}</p>
         <div class="user-panel mt-3">
           <div class="user-pic">
-            <img class="img-responsive img-rounded mCS_img_loaded" src="/imgs/64.png" alt="">
+            <img class="img-responsive img-rounded mCS_img_loaded" src="~/static/imgs/64.png" alt="">
           </div>
           <div class="user-info">
             <span class="user-name">
@@ -160,7 +160,7 @@ var websocket = null
 const visitorjson = {
   username: '',
   nickname: '',
-  headimage: '/imgs/visitor.png',
+  headimage: './imgs/visitor.png',
   chats: []
 }
 
@@ -503,7 +503,7 @@ export default {
                 var visitorNoLogin = JSON.parse(JSON.stringify(visitorjson))
                 visitorNoLogin.username = visitor.username
                 visitorNoLogin.islogin = visitor.islogin
-                visitorNoLogin.headimage = '/imgs/visitor.png'
+                visitorNoLogin.headimage = '~/static/imgs/visitor.png'
                 that.userWatting.push(visitorNoLogin)
               }
             })
@@ -770,7 +770,7 @@ export default {
       let userJson = {
         username: '',
         nickname: '',
-        headimage: '/imgs/visitor.png',
+        headimage: '~/static/imgs/visitor.png',
         islogin: true,
         chats: [
           {

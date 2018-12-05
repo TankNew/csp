@@ -2,7 +2,7 @@
   <div class="login-bg">
     <div class="login-panel">
       <div class="login-logo">
-        <img src="/imgs/128.png">
+        <img src="~/static/imgs/128.png">
         <span>e德互联企业在线客服</span>
       </div>
       <hr class="my-4">
@@ -58,7 +58,8 @@ export default {
               UserDomain: that.UserModel.UserDomain,
               UserName: that.UserModel.UserName,
               UserPass: that.UserModel.UserPass,
-              SessionId: that.macAddress
+              SessionId: that.macAddress,
+              router: that.$router
             })
             setTimeout(() => {
               that.UserModel.UserPass = ''

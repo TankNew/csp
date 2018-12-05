@@ -2,7 +2,13 @@ import tools from '~/utils/tools'
 import { AxiosForm } from '~/plugins/AxiosForm'
 import { setCurrentUserToLocalStorage, setMac, unsetCurrentUser } from './auth'
 
-export const userLogin = ({ UserDomain, UserName, UserPass, SessionId }) => {
+export const userLogin = ({
+  UserDomain,
+  UserName,
+  UserPass,
+  SessionId,
+  router
+}) => {
   let url = tools.kefuUrl + 'login'
   AxiosForm.post(url, {
     domain: UserDomain,
@@ -22,7 +28,7 @@ export const userLogin = ({ UserDomain, UserName, UserPass, SessionId }) => {
         }
         setCurrentUserToLocalStorage(user)
         setMac(SessionId)
-        window.location.replace('/#/home')
+        router.replace('/home')
       } else console.error(json.content)
     })
     .catch(function(error) {

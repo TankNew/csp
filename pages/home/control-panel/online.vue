@@ -4,7 +4,7 @@
       <div class="p-3">
         <ul class="users-list">
           <li>
-            <img src="/imgs/ednet.jpg">
+            <img src="~/static/imgs/ednet.jpg">
             <span>e德互联在线</span>
           </li>
           <li v-for="(item,index) in kefuList" :key="index">

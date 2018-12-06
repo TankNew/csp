@@ -1,11 +1,13 @@
 <template>
   <section class="control-panel">
-    <slider ref="slider" :is-chat="isChat" :is-setting="isSetting" @onSlideEnd="onSlideEnd">
+    <Slider ref="slider" :is-chat="isChat" :is-setting="isSetting" @onSlideEnd="onSlideEnd">
       <div slot="left">
         <span class="left-shrink-icon" @click="leftBarClose">
-          <i class="fas fa-arrow-left"/>
+          <i class="fas fa-arrow-left" />
         </span>
-        <p class="lead mt-5">{{ companyInfo.name }}</p>
+        <p class="lead mt-5">
+          {{ companyInfo.name }}
+        </p>
         <div class="user-panel mt-3">
           <div class="user-pic">
             <img class="img-responsive img-rounded mCS_img_loaded" src="~/static/imgs/64.png" alt="">
@@ -14,10 +16,14 @@
             <span class="user-name">
               <strong>{{ kefuinfo.nickname }}</strong>
             </span>
-            <span class="user-role">{{ kefuinfo.domain }}</span>
+            <span class="user-role">
+              {{ kefuinfo.domain }}
+            </span>
             <div class="user-status">
               <a href="javascript:void(0)">
-                <span class="btn btn-success btn-sm" style="padding:0 0.2rem;">Online</span>
+                <span class="btn btn-success btn-sm" style="padding:0 0.2rem;">
+                  Online
+                </span>
               </a>
             </div>
           </div>
@@ -26,54 +32,62 @@
         <ul class="user-toolbar">
           <li>
             <a @click="setting">
-              <i class="fas fa-cog mr-1"/>设置
+              <i class="fas fa-cog mr-1" />设置
             </a>
           </li>
           <li>
             <a @click="reConnect">
-              <i class="fas fa-redo mr-1"/>重连
+              <i class="fas fa-redo mr-1" />重连
             </a>
           </li>
           <li>
             <a @click="logout">
-              <i class="fas fa-sign-out-alt mr-1"/>退出登录
+              <i class="fas fa-sign-out-alt mr-1" />退出登录
             </a>
           </li>
         </ul>
       </div>
       <div slot="content" class="h-100">
         <header>
-          <b-alert :show="dismissCountDown" variant="info" class="small system-info mb-0" dismissible fade @dismissed="dismissCountDown=0" @dismiss-count-down="countDownChanged">
+          <BAlert :show="dismissCountDown" variant="info" class="small system-info mb-0" dismissible fade @dismissed="dismissCountDown=0" @dismiss-count-down="countDownChanged">
             <span class="system-info-text">
-              <i class="fas fa-circle mr-1"/>
-              <span class="system-info-text-content">{{ Event(systemInfoNew.code,systemInfoNew.username) }}</span>
+              <i class="fas fa-circle mr-1" />
+              <span class="system-info-text-content">
+                {{ Event(systemInfoNew.code,systemInfoNew.username) }}
+              </span>
             </span>
-          </b-alert>
+          </BAlert>
           <div class="server-status">
             <span>
-              <i class="fas fa-server text-success mr-1"/>
+              <i class="fas fa-server text-success mr-1" />
               服务器状态： {{ serverstatus }}
             </span>
             <span>
-              <i class="fas fa-globe text-success mr-1"/>
+              <i class="fas fa-globe text-success mr-1" />
               {{ kefuinfo.domain }}
             </span>
             <span>
-              <i class="fab fa-creative-commons text-success mr-1"/>版本：1.0.0
+              <i class="fab fa-creative-commons text-success mr-1" />版本：1.0.0
             </span>
           </div>
           <div v-if="!isSetting" class="top_bg">
             <div class="logo">
               <img :src="kefuinfo.headimage" class="img-responsive" alt="" @click="leftBarChange">
             </div>
-            <div class="top_title">{{ currentPage.name }}</div>
+            <div class="top_title">
+              {{ currentPage.name }}
+            </div>
           </div>
           <div v-else class="top_bg">
-            <div class="logo"><i class="fas fa-chevron-left" @click="back()"/></div>
-            <div class="top_title">{{ currentPage.name }}</div>
+            <div class="logo">
+              <i class="fas fa-chevron-left" @click="back()" />
+            </div>
+            <div class="top_title">
+              {{ currentPage.name }}
+            </div>
           </div>
         </header>
-        <nuxt-child
+        <NuxtChild
           ref="home"
           :is-setting="isSetting"
           :current-page="currentPage"
@@ -98,26 +112,28 @@
         <header>
           <div class="server-status">
             <span>
-              <i class="fas fa-server text-success mr-1"/>
+              <i class="fas fa-server text-success mr-1" />
               服务器状态： {{ serverstatus }}
             </span>
             <span>
-              <i class="fas fa-globe text-success mr-1"/>
+              <i class="fas fa-globe text-success mr-1" />
               {{ kefuinfo.domain }}
             </span>
             <span>
-              <i class="fab fa-creative-commons text-success mr-1"/>版本：1.0.0
+              <i class="fab fa-creative-commons text-success mr-1" />版本：1.0.0
             </span>
           </div>
           <div class="top_bg">
             <a @click="rightBack">
-              <i class="fas fa-chevron-left mr-1"/>
+              <i class="fas fa-chevron-left mr-1" />
             </a>
-            <div class="top_title">与 {{ currentChat.username }} 对话中</div>
+            <div class="top_title">
+              与 {{ currentChat.username }} 对话中
+            </div>
           </div>
         </header>
         <div class="w-100 h-100 position-relative">
-          <scroll ref="scrollpanel" :data="currentChat.chats" :auto-scroll="true" class="message-box-wrapper">
+          <Scroll ref="scrollpanel" :data="currentChat.chats" :auto-scroll="true" class="message-box-wrapper">
             <div class="message-box-content">
               <ul v-if="currentChat" class="mbox">
                 <li v-for="(chat,index) in currentChat.chats" :key="index" :class="chat.fromUser==kefuinfo.username?'replay':'receive'">
@@ -127,26 +143,32 @@
                   <div v-else class="headAndName">
                     <img :src="currentChat.headimage">
                   </div>
-                  <p class="pointer">{{ chat.content }}</p>
-                  <div class="clear"/>
+                  <p class="pointer">
+                    {{ chat.content }}
+                  </p>
+                  <div class="clear" />
                 </li>
               </ul>
             </div>
-          </scroll>
+          </Scroll>
           <div class="text-center">
-            <a class="btn btn-link btn-sm text-primary" @click="chatOut(currentChat,true)">结束当前对话</a>
+            <a class="btn btn-link btn-sm text-primary" @click="chatOut(currentChat,true)">
+              结束当前对话
+            </a>
           </div>
           <div class="message-box-tools">
             <div class="message-box-tools-input">
               <textarea v-model="message" class="form-control" rows="3" style="resize:none" @keydown.enter="chatSubmit(currentChat.username,$event)">输入内容</textarea>
             </div>
             <div class="message-box-tools-btn">
-              <button type="button" class="btn btn-success px-1" @click="chatSubmit(currentChat.username,$event)">发 送</button>
+              <button type="button" class="btn btn-success px-1" @click="chatSubmit(currentChat.username,$event)">
+                发 送
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </slider>
+    </Slider>
   </section>
 </template>
 <script>
